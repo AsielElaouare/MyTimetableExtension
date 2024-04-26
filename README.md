@@ -1,1 +1,1 @@
-# MyTimeTablesExtension
+# MyTimetableExtension
