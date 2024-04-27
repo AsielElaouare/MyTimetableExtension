@@ -3,7 +3,7 @@
     "version": "1.0",
     "manifest_version": 3,
     "background":{
-        "service_worker": "./js/app.js"
+        "service_worker": "./js/script.js"
     },
     "description": "Base Level Extension",
     "action": {
@@ -14,7 +14,7 @@
     },
     "content_scripts": [
         {
-          "js": ["js/app.js"],
+          "js": ["js/script.js"],
           "matches": [
             "http://192.168.178.208:8383/"
           ]
