@@ -1,112 +1,76 @@
+*{
+    box-sizing: 0;
+    padding: 0;
+    margin: 0;
+}
+
 body{
-    margin-top:20px;
+    width: 500px;
+    height: 200px;
 }
-.bg-light-gray {
-    background-color: #f7f7f7;
+/* Define fixed width and height for table and cells */
+#schedule {
+    width: 100%;
+    height: auto; /* Adjust as needed */
+    table-layout: fixed;
+
 }
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 2px;
+.month{
+
 }
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+
+.spinner{
+    
 }
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
+
+.previous-week, .next-week{
+    margin: 5px;
+}
+.next-week{
+    float: right;
+    clear: both;
+}
+#schedule th, #schedule td {
+    width: 20%; /* 5 columns, so each gets 20% */
+    height: 40px; /* Adjust as needed */
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container-lessons{
+    border-bottom: solid;
+    margin-bottom: 5px;
+}
+
+/* Additional styles for better visibility */
+h2 {
+    margin: 5px;
+}
+p{
+    font-size: 11px;
+    margin-bottom: 2;
+}
+
+.p-location{
+    font-size: 10px;
+    margin: 5px 0 5px 0;
 }
 
 
-.bg-sky.box-shadow {
-    box-shadow: 0px 5px 0px 0px #00a2a7
+
+#days th {
+    text-align: center;
 }
 
-.bg-orange.box-shadow {
-    box-shadow: 0px 5px 0px 0px #af4305
-}
-
-.bg-green.box-shadow {
-    box-shadow: 0px 5px 0px 0px #4ca520
-}
-
-.bg-yellow.box-shadow {
-    box-shadow: 0px 5px 0px 0px #dcbf02
-}
-
-.bg-pink.box-shadow {
-    box-shadow: 0px 5px 0px 0px #e82d8b
-}
-
-.bg-purple.box-shadow {
-    box-shadow: 0px 5px 0px 0px #8343e8
-}
-
-.bg-lightred.box-shadow {
-    box-shadow: 0px 5px 0px 0px #d84213
-}
-
-
-.bg-sky {
-    background-color: #02c2c7
-}
-
-.bg-orange {
-    background-color: #e95601
-}
-
-.bg-green {
-    background-color: #5bbd2a
-}
-
-.bg-yellow {
-    background-color: #f0d001
-}
-
-.bg-pink {
-    background-color: #ff48a4
-}
-
-.bg-purple {
-    background-color: #9d60ff
-}
-
-.bg-lightred {
-    background-color: #ff5722
-}
-
-.padding-15px-lr {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.padding-5px-tb {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.margin-10px-bottom {
-    margin-bottom: 10px;
-}
-.border-radius-5 {
-    border-radius: 5px;
-}
-
-.margin-10px-top {
-    margin-top: 10px;
-}
-.font-size14 {
-    font-size: 14px;
-}
-
-.text-light-gray {
-    color: #d6d5d5;
-}
-.font-size13 {
-    font-size: 13px;
-}
-
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-}
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    #schedule th,
+    #schedule td {
+        width: auto;
+        height: 50px; /* Adjust as needed */
+        white-space: normal;
+        text-align: left;
+    }
 }
