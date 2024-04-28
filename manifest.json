@@ -1,21 +1,30 @@
 {
-  "name": "MyTimeTables",
-  "version": "1.0",
-  "manifest_version": 3,
-  "background": {
+    "name": "MyTimeTables",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
       "service_worker": "./js/script.js"
-  },
-  "description": "Base Level Extension",
-  "action": {
+    },
+    "description": "Base Level Extension",
+    "action": {
       "default_popup": "index.html"
-  },
-  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com; object-src 'self';",
-  "content_scripts": [
+    },
+    "permissions": [
+      "http://192.168.178.208:8383/*",
+      "https://*/*"
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    },
+    "content_scripts": [
       {
-          "js": ["js/script.js", "bootstrap.min.js"],
-          "matches": [
-              "http://192.168.178.208:8383/", "http://*/*", "https://*/*"
-          ]
+        "js": ["js/script.js", "js/bootstrap.min.js"],
+        "matches": [
+          "http://192.168.178.208:8383/*",
+          "http://*/*",
+          "https://*/*"
+        ]
       }
-  ]
-}
+    ]
+  }
+  
