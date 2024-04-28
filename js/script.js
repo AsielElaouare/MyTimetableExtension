@@ -1,11 +1,23 @@
+
 const LAST_DAY_OF_WEEK = 4;
 const baseUrl = "http://192.168.178.208:8383/";
 
+let weekBtnVar = 7;
 const submitBtn = document.getElementById("submitBtn");
-const input = document.getElementById("inputURL")
+const input = document.getElementById("inputURL");
+const previousWeekBtnTag = document.getElementById("previousWeek");
+const nextWeekBtnTag = document.getElementById("nextWeek");
+const spinner = document.getElementById("spinner");
+const schedule = document.getElementById("schedule");
+
 
 submitBtn.addEventListener('click', sendURL);
 
+previousWeekBtnTag.addEventListener('click', previousWeekBtn);
+nextWeekBtnTag.addEventListener('click', nextWeekBtn);
+
+
+const currentWeekNow = currentWeek();
 
 async function sendURL(e){
     e.preventDefault();
@@ -18,41 +30,70 @@ async function sendURL(e){
             URL: input.value
         })
     });
-    getData();
-}
+    getData(currentWeekNow);
+};
 
-
-async function getData(){
+async function getData(weekDate){
+    spinner.style.visibility = "visible";
+    schedule.style.visibility = "hidden";
     try
     {
         const res = await fetch(baseUrl, {
             method: "GET"
         });
         const data = await res.json();
-        console.log("Data receveid:", data);
+        //console.log("Data receveid:", data);
         localStorage.setItem("data", JSON.stringify(data));
-        loadLessons(data);   
+        loadLessons(data, weekDate);   
     }
     catch (error){
         console.error("Error fetchnig data:", error);
         const localData = JSON.parse(localStorage.getItem("data"));
-        console.log("this is localdata: ",localData);
-        loadLessons(localData);   
+        //console.log("this is localdata: ",localData);
+        loadLessons(localData, weekDate);   
     };
-
 };
 
-function loadLessons(data){
-    const currentWeekVar = currentWeek();
+function loadLessons(data, currentWeekVar){
+    buttonClicked = false;
     data.forEach(lesson => {
         const { startDate, endDate, lastDay } = getLessonDays(lesson, currentWeekVar)
         lastDay.setDate(currentWeekVar.getDate() + LAST_DAY_OF_WEEK);
         if(startDate >= currentWeekVar && startDate <= lastDay)
         {
-            displayLessons(lesson, startDate, endDate, currentWeekVar);
-            
-        }
-    });
+            displayLessons(lesson, startDate, endDate, currentWeekVar);    
+        };
+    });  
+    schedule.style.visibility = "visible";
+    spinner.style.visibility = "hidden";
+
+};
+
+function nextWeek(){
+    let currentWeekVar = currentWeek();
+    currentWeekVar.setDate(currentWeekVar.getDate() + weekBtnVar);
+    weekBtnVar += 7;
+    return currentWeekVar;
+};
+
+function nextWeekBtn(){
+    let week = nextWeek();
+    deleteExistentData();
+    getData(week);
+};
+
+function previousWeek(){
+    let currentWeekVar = currentWeek();
+    currentWeekVar.setDate(currentWeekVar.getDate() - weekBtnVar);
+    weekBtnVar += 7;
+    return currentWeekVar;
+};
+
+function previousWeekBtn(){
+    let week = previousWeek();
+    deleteExistentData();
+
+    getData(week);
 
 };
 
@@ -66,11 +107,12 @@ function getLessonDays(lesson, currentWeekVar){
     const lastDay = new Date(currentWeekVar);
 
     return { startDate, endDate, lastDay };
-}
+};
 
 function currentWeek(){
     const today = new Date();
     const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
+    startOfWeek.setDate(startOfWeek.getDate() -7);
     return startOfWeek;
 };
 
@@ -82,6 +124,12 @@ function displayLessons(lesson, startDate, endDate, currentWeekVar){
     const pSummary = document.createElement("p");
     const startHour = startDate.getHours() + ":" + (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes();
     const endHour = endDate.getHours() + ":" + (endDate.getMinutes() < 10 ? '0' : '') + endDate.getMinutes();
+
+    pTime.classList.add("p-time")
+    pLocation.classList.add("p-location")
+    pSummary.classList.add("p-summary")
+    div.classList.add("container-lessons")
+
     pTime.innerText = startHour + "-" + endHour;
     pLocation.innerText = lesson.LOCATION;
     pSummary.innerText = lesson.SUMMARY;
@@ -90,29 +138,42 @@ function displayLessons(lesson, startDate, endDate, currentWeekVar){
     div.appendChild(pLocation);
     div.appendChild(pSummary);
     appendWeekDayHtmlTable(div, startDate);
-    displayWeekHeader(currentWeekVar)
+    displayWeekHeader(currentWeekVar);
 
 };
 
+
+function deleteExistentData(){
+    // Clear existing lesson data
+    const lessonCells = document.querySelectorAll('[id^="lessons-"]');
+    lessonCells.forEach(cell => {
+        cell.innerHTML = '';
+    });
+};
+
 function displayWeekHeader(currentWeekVar){
-    const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+    let monthHeader = document.getElementById("month");
+    const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
     const week = new Date(currentWeekVar); 
     let dayNumber = week.getDate();
     for(let i=  0; i <5; i++){
         let weekHtmlHeader = document.getElementById(daysOfWeek[i]);
         weekHtmlHeader.innerText = daysOfWeek[i] + " " + dayNumber;
         dayNumber++;
-    }
-}
+    };
+    const month = week.toLocaleString('default', { month: 'long' });
+    monthHeader.innerText = month;
+};
 
 function appendWeekDayHtmlTable(div, startDate){
-    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     const dayOfWeek = (startDate.getDay() + 6) % 7; 
     const dayOfWeekString = daysOfWeek[dayOfWeek];
 
     let weekDayHtml = document.getElementById("lessons-" + dayOfWeekString);
 
-    switch (dayOfWeekString) {
+    switch (dayOfWeekString) 
+    {
         case 'Monday':
             weekDayHtml.appendChild(div);
           break;
@@ -129,8 +190,9 @@ function appendWeekDayHtmlTable(div, startDate){
             weekDayHtml.appendChild(div);
           break;
         default:
-      }
-}
+    };
+};
+
 function isoFormat(date) {
     const dateString = date;
     const year = dateString.slice(0, 4);
@@ -142,11 +204,19 @@ function isoFormat(date) {
 
     // Create a date object in Brussels time
     const brusselsDate = new Date(year, month - 1, day, hours, minutes, seconds);
-    
     // Format the date as ISO string
     const isoDateString = brusselsDate.toISOString();
-
     return isoDateString;
 };
 
-getData();
+function loadSchedule(){
+    if (schedule.style.visibility === "hidden") {
+        schedule.style.visibility = "visible";
+      } else {
+        schedule.style.visibility = "hidden";
+      };
+      console.log("laod scheduel is triggered;")
+};
+
+
+getData(currentWeekNow);

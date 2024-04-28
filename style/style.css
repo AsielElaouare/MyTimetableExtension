@@ -1,0 +1,76 @@
+*{
+    box-sizing: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    width: 500px;
+    height: 200px;
+}
+/* Define fixed width and height for table and cells */
+#schedule {
+    width: 100%;
+    height: auto; /* Adjust as needed */
+    table-layout: fixed;
+
+}
+.month{
+
+}
+
+.spinner{
+    
+}
+
+.previous-week, .next-week{
+    margin: 5px;
+}
+.next-week{
+    float: right;
+    clear: both;
+}
+#schedule th, #schedule td {
+    width: 20%; /* 5 columns, so each gets 20% */
+    height: 40px; /* Adjust as needed */
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container-lessons{
+    border-bottom: solid;
+    margin-bottom: 5px;
+}
+
+/* Additional styles for better visibility */
+h2 {
+    margin: 5px;
+}
+p{
+    font-size: 11px;
+    margin-bottom: 2;
+}
+
+.p-location{
+    font-size: 10px;
+    margin: 5px 0 5px 0;
+}
+
+
+
+#days th {
+    text-align: center;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    #schedule th,
+    #schedule td {
+        width: auto;
+        height: 50px; /* Adjust as needed */
+        white-space: normal;
+        text-align: left;
+    }
+}
