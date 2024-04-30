@@ -1,9 +1,6 @@
-
 const LAST_DAY_OF_WEEK = 4;
-const baseUrl = "http://192.168.178.208:8383/";
+const baseUrl = "http:icalparser.duckdns.org:8383/";
 
-let weekBtnVar = 7;
-const submitBtn = document.getElementById("submitBtn");
 const input = document.getElementById("inputURL");
 const previousWeekBtnTag = document.getElementById("previousWeek");
 const nextWeekBtnTag = document.getElementById("nextWeek");
@@ -19,60 +16,89 @@ nextWeekBtnTag.addEventListener('click', nextWeekBtn);
 
 const currentWeekNow = currentWeek();
 
-async function sendURL(e){
-    e.preventDefault();
-    const res = await fetch(baseUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify ({
-            URL: input.value
-        })
-    });
-    getData(currentWeekNow);
+let currentDisplayedWeek = null;
+
+async function sendURL(){
+    let isValidURL = validatorURL(input.value);
+    if(input.value != "" && isValidURL != false){
+        try{
+        const res = await fetch(baseUrl, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify ({
+                URL: input.value
+            })
+        });
+        localStorage.setItem("icalURL", input.value);
+        getData(currentWeekNow);
+        }
+        catch{
+            console.log("Server is Down")
+        }
+    };
 };
 
-async function getData(weekDate){
-    spinner.style.visibility = "visible";
-    schedule.style.visibility = "hidden";
+
+function validatorURL(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+  
+
+function showInputURL(){
+    input.value = localStorage.getItem("icalURL")
+}
+
+async function icalRequest(){
+    sendURL();
     try
     {
         const res = await fetch(baseUrl, {
             method: "GET"
         });
         const data = await res.json();
-        //console.log("Data receveid:", data);
         localStorage.setItem("data", JSON.stringify(data));
-        loadLessons(data, weekDate);   
     }
     catch (error){
         console.error("Error fetchnig data:", error);
-        const localData = JSON.parse(localStorage.getItem("data"));
-        //console.log("this is localdata: ",localData);
-        loadLessons(localData, weekDate);   
     };
+}
+
+async function getData(weekDate){
+    loadSpinner();
+    const localData = JSON.parse(localStorage.getItem("data"));
+    loadLessons(localData, weekDate);   
 };
 
 function loadLessons(data, currentWeekVar){
-    buttonClicked = false;
     data.forEach(lesson => {
         const { startDate, endDate, lastDay } = getLessonDays(lesson, currentWeekVar)
         lastDay.setDate(currentWeekVar.getDate() + LAST_DAY_OF_WEEK);
         if(startDate >= currentWeekVar && startDate <= lastDay)
         {
-            displayLessons(lesson, startDate, endDate, currentWeekVar);    
-        };
-    });  
-    schedule.style.visibility = "visible";
-    spinner.style.visibility = "hidden";
+            displayLessons(lesson, startDate, endDate, currentWeekVar);
+            currentDisplayedWeek =  currentWeekVar; 
 
+        }
+        else{
+            currentDisplayedWeek = currentWeekNow;
+        }
+    });  
+    displayWeekHeader(currentDisplayedWeek);
+    laodSchedule();
 };
 
 function nextWeek(){
-    let currentWeekVar = currentWeek();
-    currentWeekVar.setDate(currentWeekVar.getDate() + weekBtnVar);
-    weekBtnVar += 7;
+    let currentWeekVar = currentDisplayedWeek;
+    currentWeekVar.setDate(currentWeekVar.getDate() + 7); 
+    console.log("inside next function:", currentWeekVar);
+    console.log(currentDisplayedWeek);
     return currentWeekVar;
 };
 
@@ -83,18 +109,16 @@ function nextWeekBtn(){
 };
 
 function previousWeek(){
-    let currentWeekVar = currentWeek();
-    currentWeekVar.setDate(currentWeekVar.getDate() - weekBtnVar);
-    weekBtnVar += 7;
+    let currentWeekVar = currentDisplayedWeek;
+    currentWeekVar.setDate(currentWeekVar.getDate() - 7); 
+    console.log("inside previous function:", currentWeekVar);
     return currentWeekVar;
 };
 
 function previousWeekBtn(){
     let week = previousWeek();
     deleteExistentData();
-
     getData(week);
-
 };
 
 function getLessonDays(lesson, currentWeekVar){
@@ -112,7 +136,7 @@ function getLessonDays(lesson, currentWeekVar){
 function currentWeek(){
     const today = new Date();
     const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
-    startOfWeek.setDate(startOfWeek.getDate() -7);
+    startOfWeek.setDate(startOfWeek.getDate());
     return startOfWeek;
 };
 
@@ -139,12 +163,10 @@ function displayLessons(lesson, startDate, endDate, currentWeekVar){
     div.appendChild(pSummary);
     appendWeekDayHtmlTable(div, startDate);
     displayWeekHeader(currentWeekVar);
-
 };
 
 
 function deleteExistentData(){
-    // Clear existing lesson data
     const lessonCells = document.querySelectorAll('[id^="lessons-"]');
     lessonCells.forEach(cell => {
         cell.innerHTML = '';
@@ -202,21 +224,20 @@ function isoFormat(date) {
     const minutes = dateString.slice(11, 13);
     const seconds = dateString.slice(13, 15);
 
-    // Create a date object in Brussels time
     const brusselsDate = new Date(year, month - 1, day, hours, minutes, seconds);
-    // Format the date as ISO string
     const isoDateString = brusselsDate.toISOString();
     return isoDateString;
 };
 
-function loadSchedule(){
-    if (schedule.style.visibility === "hidden") {
-        schedule.style.visibility = "visible";
-      } else {
-        schedule.style.visibility = "hidden";
-      };
-      console.log("laod scheduel is triggered;")
+function loadSpinner(){
+    spinner.style.visibility = "visible";
+    schedule.style.visibility = "hidden";
 };
 
-
+function laodSchedule(){
+    spinner.style.visibility = "hidden";
+    schedule.style.visibility = "visible";
+};
+showInputURL();
+icalRequest();
 getData(currentWeekNow);

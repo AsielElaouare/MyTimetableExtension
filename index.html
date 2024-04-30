@@ -12,7 +12,7 @@
           <h5 class="text-body-emphasis h4">Enter Mytimetable URL</h5>
           <div class="input-group mb-3">
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon3">https://mytimetables/schedule/...</span>
+                  <span class="input-group-text" id="basic-addon3">https://mytimetables...</span>
                 </div>
                 <input type="text" class="form-control" id="inputURL" aria-describedby="basic-addon3">
                 <button id="submitBtn" class="btn btn-primary">Submit</button>
@@ -32,6 +32,7 @@
     <button id="previousWeek" class="btn btn-primary previous-week">Previous Week</button>
     <button id="nextWeek" class="btn btn-primary next-week">Next Week</button>
     <div id="schedule-container">
+      <div id="no-data"></div>
         <table id="schedule" class="table table-bordered table-sm ">
             <h2 id="month" class="month"></h2>
             <tr id="days">
@@ -41,7 +42,7 @@
                 <th class="col" id="Thu" style="text-align: center">Thu</th>
                 <th class="col" id="Fri" style="text-align: center">Fri</th>
             </tr>
-            <tr>
+            <tr id="lessons">
                 <td id="lessons-Monday"></td>
                 <td id="lessons-Tuesday"></td>
                 <td id="lessons-Wednesday"></td>

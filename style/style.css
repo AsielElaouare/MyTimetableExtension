@@ -16,6 +16,13 @@ body{
 
 }
 
+#days{
+    height: 10px;
+}
+
+#lessons{
+    height: 400px;
+}
 .previous-week, .next-week{
     margin: 5px;
 }
