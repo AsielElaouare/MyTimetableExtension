@@ -21,7 +21,7 @@
       {
         "js": ["js/script.js", "js/bootstrap.min.js"],
         "matches": [
-          "http://192.168.178.208:8383/*",
+          "http://icalparser.duckdns.org:8383/*",
           "http://*/*",
           "https://*/*"
         ]
