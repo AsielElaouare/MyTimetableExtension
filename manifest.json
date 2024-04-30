@@ -11,7 +11,7 @@
       "default_icon": "calendar-icon.png"
     },
     "permissions": [
-      "http://192.168.178.208:8383/*",
+      "http://icalparser.duckdns.org:8383/*",
       "https://*/*"
     ],
     "content_security_policy": {
