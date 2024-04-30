@@ -77,6 +77,7 @@ async function getData(weekDate){
 };
 
 function loadLessons(data, currentWeekVar){
+    deleteExistentData();
     data.forEach(lesson => {
         const { startDate, endDate, lastDay } = getLessonDays(lesson, currentWeekVar)
         lastDay.setDate(currentWeekVar.getDate() + LAST_DAY_OF_WEEK);
@@ -104,7 +105,6 @@ function nextWeek(){
 
 function nextWeekBtn(){
     let week = nextWeek();
-    deleteExistentData();
     getData(week);
 };
 
@@ -117,7 +117,6 @@ function previousWeek(){
 
 function previousWeekBtn(){
     let week = previousWeek();
-    deleteExistentData();
     getData(week);
 };
 
