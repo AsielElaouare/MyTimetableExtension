@@ -43,8 +43,7 @@ This project is open source, and contributions are welcome! Whether you want to 
 
 #  Demo Images 
 
-![Demo](images/demo1.png) ![Demo](images/demo2.png)
-
-
-
+|         |          |
+|:--------------------------:|:--------------------------:|
+| ![Solarized Dark](images/demo2.png)  |  ![Solarized Ocean](images/demo1.png)  |
 
