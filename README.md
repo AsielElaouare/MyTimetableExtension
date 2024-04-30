@@ -1,4 +1,6 @@
 # MyTimetable Chrome Extension: Access Your University Schedule with Ease
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/YOUR_EXTENSION_ID_HERE?label=Chrome%20Web%20Store&style=for-the-badge&logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID_HERE) [![Bootstrap](https://img.shields.io/badge/Frontend-Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/) [![JavaScript](https://img.shields.io/badge/Frontend-JavaScript-yellow?style=for-the-badge&logo=javascript&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![HTML5](https://img.shields.io/badge/Frontend-HTML5-orange?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS3](https://img.shields.io/badge/Frontend-CSS3-blue?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) [![Node.js](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+
 
 ### **Description:**
 
