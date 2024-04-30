@@ -5,7 +5,7 @@
     "background": {
       "service_worker": "./js/script.js"
     },
-    "description": "Base Level Extension",
+    "description": "Schedule extension using Mytimetable personal URL",
     "action": {
       "default_popup": "index.html",
       "default_icon": "calendar-icon.png"
