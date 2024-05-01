@@ -40,3 +40,10 @@ This project is open source, and contributions are welcome! Whether you want to 
 2. Follow the setup instructions to connect your MyTimetable account.
 3. Enjoy easy access to your university schedule directly from your browser!
 
+
+#  Demo Images 
+
+|         |          |
+|:--------------------------:|:--------------------------:|
+| ![Solarized Dark](images/demo2.png)  |  ![Solarized Ocean](images/demo1.png)  |
+
