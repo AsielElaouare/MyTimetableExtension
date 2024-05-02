@@ -180,7 +180,8 @@ function displayWeekHeader(currentWeekVar){
     for(let i=  0; i <5; i++){
         let weekHtmlHeader = document.getElementById(daysOfWeek[i]);
         weekHtmlHeader.innerText = daysOfWeek[i] + " " + dayNumber;
-        dayNumber++;
+        week.setDate(week.getDate() + 1);
+        dayNumber = week.getDate();
     };
     const month = week.toLocaleString('default', { month: 'long' });
     monthHeader.innerText = month;
