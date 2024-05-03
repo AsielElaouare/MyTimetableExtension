@@ -8,14 +8,21 @@ body{
     width: 500px;
     height: 200px;
 }
-/* Define fixed width and height for table and cells */
+
+.instructions{
+    font-size: 15px;
+}
 #schedule {
     width: 100%;
-    height: auto; /* Adjust as needed */
+    height: auto; 
     table-layout: fixed;
 
 }
 
+#week-number{
+    font-size: 14px;
+    margin-left: 5px;
+}
 #days{
     height: 10px;
 }
