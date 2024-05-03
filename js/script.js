@@ -1,5 +1,5 @@
-const LAST_DAY_OF_WEEK = 4;
-const baseUrl = "http:icalparser.duckdns.org:8383/";
+const LAST_DAY_OF_WEEK = 5;
+const baseUrl = "http://icalparser.duckdns.org:8383/";
 
 const input = document.getElementById("inputURL");
 const previousWeekBtnTag = document.getElementById("previousWeek");
@@ -84,6 +84,8 @@ function loadLessons(data, currentWeekVar){
         if(startDate >= currentWeekVar && startDate <= lastDay)
         {
             displayLessons(lesson, startDate, endDate, currentWeekVar);
+            displayWeekHeader(currentWeekVar);
+
             currentDisplayedWeek =  currentWeekVar; 
 
         }
@@ -91,7 +93,7 @@ function loadLessons(data, currentWeekVar){
             currentDisplayedWeek = currentWeekNow;
         }
     });  
-    displayWeekHeader(currentDisplayedWeek);
+    displayWeekHeader(currentWeekVar);
     laodSchedule();
 };
 
@@ -161,7 +163,6 @@ function displayLessons(lesson, startDate, endDate, currentWeekVar){
     div.appendChild(pLocation);
     div.appendChild(pSummary);
     appendWeekDayHtmlTable(div, startDate);
-    displayWeekHeader(currentWeekVar);
 };
 
 
@@ -175,16 +176,20 @@ function deleteExistentData(){
 function displayWeekHeader(currentWeekVar){
     let monthHeader = document.getElementById("month");
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-    const week = new Date(currentWeekVar); 
+    const week = new Date(currentWeekVar);
+    const day = new Date(currentWeekVar); 
     let dayNumber = week.getDate();
     for(let i=  0; i <5; i++){
         let weekHtmlHeader = document.getElementById(daysOfWeek[i]);
         weekHtmlHeader.innerText = daysOfWeek[i] + " " + dayNumber;
-        week.setDate(week.getDate() + 1);
-        dayNumber = week.getDate();
+        day.setDate(day.getDate() + 1);
+        dayNumber = day.getDate();
     };
     const month = week.toLocaleString('default', { month: 'long' });
     monthHeader.innerText = month;
+    console.log(month)
+    console.log(week)
+    console.log(dayNumber)
 };
 
 function appendWeekDayHtmlTable(div, startDate){
