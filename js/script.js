@@ -6,6 +6,7 @@ const previousWeekBtnTag = document.getElementById("previousWeek");
 const nextWeekBtnTag = document.getElementById("nextWeek");
 const spinner = document.getElementById("spinner");
 const schedule = document.getElementById("schedule");
+const submitBtn = document.getElementById("submitBtn")
 
 
 submitBtn.addEventListener('click', sendURL);
