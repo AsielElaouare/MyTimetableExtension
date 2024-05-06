@@ -1,31 +1,33 @@
 {
-    "name": "MyTimetable extension",
-    "version": "1.0.3",
-    "manifest_version": 3,
-    "background": {
-      "service_worker": "./js/script.js"
-    },
-    "description": "Schedule extension using Mytimetable personal URL",
-    "action": {
-      "default_popup": "index.html",
-      "default_icon": "calendar-icon.png"
-    },
-    "permissions": [
-      "http://icalparser.duckdns.org:8383/*",
-      "https://*/*"
-    ],
-    "content_security_policy": {
-      "extension_pages": "script-src 'self'; object-src 'self';"
-    },
-    "content_scripts": [
-      {
-        "js": ["js/script.js", "js/bootstrap.min.js"],
-        "matches": [
-          "http://icalparser.duckdns.org:8383/*",
-          "http://*/*",
-          "https://*/*"
-        ]
-      }
-    ]
-  }
-  
+  "name": "MyTimetable extension",
+  "version": "1.0.3",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "./js/script.js"
+  },
+  "description": "Schedule extension using Mytimetable personal URL",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "calendar-icon.png"
+  },
+  "permissions": [
+    "http://icalparser.duckdns.org:8383/*",
+    "https://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/script.js",
+        "js/bootstrap.bundle.js"
+      ],
+      "matches": [
+        "http://icalparser.duckdns.org:8383/*",
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
+}
