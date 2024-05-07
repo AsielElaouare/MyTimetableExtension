@@ -36,10 +36,17 @@ This project is open source, and contributions are welcome! Whether you want to 
 
 **Get Started:**
 
-1. Install the extension from the Chrome Web Store.
+1. Install the extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/mytimetable-extension/klncbnaldfocekpkobheednoaddhgpna?hl=en ).
 2. Follow the setup instructions to connect your MyTimetable account.
 3. Enjoy easy access to your university schedule directly from your browser!
 
+
+
+## Note
+*The MyTimetable Chrome extension is also available for browsers using the Chromium engine, such as Microsoft Edge, Brave and Opera. So if you're using one of these browsers, you can still enjoy the convenience of accessing your university schedule with ease!*
+
+Donwload link:
+https://chromewebstore.google.com/detail/mytimetable-extension/klncbnaldfocekpkobheednoaddhgpna?hl=en
 
 #  Demo Images 
 
