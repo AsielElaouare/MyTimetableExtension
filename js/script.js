@@ -1,5 +1,5 @@
 const LAST_DAY_OF_WEEK = 5;
-const baseUrl = "http://icalparser.duckdns.org:8383/";
+const baseUrl = "https://icalparser.asiel-elaouare.com";
 
 const input = document.getElementById("inputURL");
 const previousWeekBtnTag = document.getElementById("previousWeek");
@@ -87,6 +87,8 @@ function nextWeek() {
 	console.log(currentDisplayedWeek);
 	return currentWeekVar;
 };
+
+
 
 function nextWeekBtn() {
 	let week = nextWeek();
