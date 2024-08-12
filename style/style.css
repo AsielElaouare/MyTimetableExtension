@@ -30,16 +30,10 @@ body{
 #lessons{
     height: 400px;
 }
-.previous-week, .next-week{
-    margin: 5px;
-}
-.next-week{
-    float: right;
-    clear: both;
-}
+
 #schedule th, #schedule td {
     width: 20%; /* 5 columns, so each gets 20% */
-    height: 40px; /* Adjust as needed */
+    height: 40px; 
     padding: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -76,7 +70,7 @@ p{
     #schedule th,
     #schedule td {
         width: auto;
-        height: 50px; /* Adjust as needed */
+        height: 50px; 
         white-space: normal;
         text-align: left;
     }

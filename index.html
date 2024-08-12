@@ -12,7 +12,7 @@
 <body>
 	<div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
 		<div class="bg-dark p-4">
-			<h5 class="text-body-emphasis h4">Enter Mytimetable URL</h5>
+			<h5 class="text-body-emphasis h4">Enter MyTimetable URL</h5>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon3">https://example...</span>
@@ -36,8 +36,11 @@
 			</div>
 		</div>
 	</nav>
-	<button id="previousWeek" class="btn btn-primary previous-week">Previous Week</button>
-	<button id="nextWeek" class="btn btn-primary next-week">Next Week</button>
+	<div class="d-flex justify-content-between">
+		<button id="previousWeek" class="btn btn-primary previous-week m-1">Previous Week</button>
+		<button id="thisWeek" class="btn btn-primary this-week m-1">This Week</button>
+		<button id="nextWeek" class="btn btn-primary next-week m-1">Next Week</button>
+	</div>
 	<div id="schedule-container">
 		<div id="no-data"></div>
 		<table id="schedule" class="table table-bordered table-sm ">

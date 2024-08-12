@@ -4,6 +4,7 @@ const baseUrl = "https://icalparser.asiel-elaouare.com";
 const input = document.getElementById("inputURL");
 const previousWeekBtnTag = document.getElementById("previousWeek");
 const nextWeekBtnTag = document.getElementById("nextWeek");
+const thisWeekBtnTag = document.getElementById("thisWeek");
 const spinner = document.getElementById("spinner");
 const schedule = document.getElementById("schedule");
 const submitBtn = document.getElementById("submitBtn")
@@ -12,6 +13,7 @@ submitBtn.addEventListener('click', sendURL);
 
 previousWeekBtnTag.addEventListener('click', previousWeekBtn);
 nextWeekBtnTag.addEventListener('click', nextWeekBtn);
+thisWeekBtnTag.addEventListener('click', thisWeekBtn);
 
 const currentWeekNow = currentWeek();
 
@@ -79,6 +81,10 @@ function loadLessons(data, currentWeekVar) {
 	displayWeekHeader(currentWeekVar);
 	loadSchedule();
 };
+
+function thisWeekBtn(){
+	location.reload();
+}
 
 function nextWeek() {
 	let currentWeekVar = currentDisplayedWeek;
@@ -215,7 +221,6 @@ function isoFormat(date) {
 };
 
 function getWeekNumber(date) {
-	// Copy date so don't modify original
 	date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 	// Set to nearest Thursday: current date + 4 - current day number
 	// Make Sunday's day number 7
